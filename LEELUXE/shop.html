@@ -1,0 +1,1510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop · The Collection | LEE LUXE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <style>
+        /* ========== SHOP PAGE SPECIFIC LUXURY STYLES ========== */
+        :root {
+            --gold: #c4a747;
+            --charcoal: #1a1a1a;
+            --pure-black: #000000;
+            --off-white: #f5f5f5;
+        }
+
+        /* Shop Hero */
+        .shop-hero {
+    height: 40vh;
+    min-height: 400px;
+    background: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 100%), url('../images/leeluxe.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 80px;
+    position: relative;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+        .shop-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+        }
+
+        .shop-hero-content {
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .shop-hero h1 {
+            font-size: clamp(3rem, 8vw, 5rem);
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .shop-hero .hero-subtitle {
+            font-size: 1rem;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 200;
+            color: #fff;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.5);
+        }
+
+        /* Filter Bar */
+        .filter-bar {
+            background-color: #0a0a0a;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 80px;
+            z-index: 90;
+            backdrop-filter: blur(10px);
+        }
+
+        .filter-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .filter-left {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .filter-dropdown {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .filter-dropdown select {
+            appearance: none;
+            background: transparent;
+            border: none;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 300;
+            padding: 0.5rem 2rem 0.5rem 0;
+            cursor: pointer;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .filter-dropdown select option {
+            background: #000000;
+            color: #ffffff;
+        }
+
+        .filter-dropdown::after {
+            content: '\f078';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255,255,255,0.6);
+            font-size: 0.8rem;
+            pointer-events: none;
+        }
+
+        .filter-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-tag {
+            padding: 0.4rem 1.2rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 30px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .filter-tag:hover,
+        .filter-tag.active {
+            background-color: #ffffff;
+            color: #000000;
+            border-color: #ffffff;
+        }
+
+        .filter-right {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .view-toggle {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .view-btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: transparent;
+            color: #ffffff;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .view-btn:hover,
+        .view-btn.active {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        .results-count {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+        }
+
+        /* Shop Layout */
+        .shop-layout {
+            padding: 4rem 0 6rem;
+            background-color: #000000;
+        }
+
+        .shop-grid {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 3rem;
+        }
+
+        /* Sidebar Filters */
+        .filter-sidebar {
+            position: sticky;
+            top: 180px;
+            height: fit-content;
+        }
+
+        .filter-section {
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 2rem;
+        }
+
+        .filter-section h3 {
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+        }
+
+        .filter-option {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .filter-option input[type="checkbox"] {
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 1px solid rgba(255,255,255,0.3);
+            background: transparent;
+            margin-right: 1rem;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s;
+        }
+
+        .filter-option input[type="checkbox"]:checked {
+            background-color: #ffffff;
+            border-color: #ffffff;
+        }
+
+        .filter-option input[type="checkbox"]:checked::after {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            font-size: 0.7rem;
+            color: #000000;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .filter-option label {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.7);
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .filter-option .count {
+            color: rgba(255,255,255,0.3);
+            font-size: 0.85rem;
+        }
+
+        /* Price Range */
+        .price-range {
+            margin-top: 1rem;
+        }
+
+        .price-inputs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .price-input {
+            flex: 1;
+        }
+
+        .price-input label {
+            display: block;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 0.3rem;
+        }
+
+        .price-input input {
+            width: 100%;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 0.5rem;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .price-slider {
+            height: 2px;
+            background: rgba(255,255,255,0.2);
+            position: relative;
+            margin: 1rem 0;
+        }
+
+        .price-slider .fill {
+            height: 100%;
+            background: #ffffff;
+            position: absolute;
+            left: 20%;
+            right: 20%;
+        }
+
+        /* Color Options */
+        .color-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .color-dot {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: transform 0.3s;
+        }
+
+        .color-dot:hover {
+            transform: scale(1.1);
+        }
+
+        .color-dot.black {
+            background-color: #000000;
+            border: 2px solid #ffffff;
+        }
+
+        .color-dot.white {
+            background-color: #ffffff;
+            border: 2px solid #ffffff;
+        }
+
+        .color-dot.nude {
+            background-color: #f5d0b8;
+        }
+
+        .color-dot.red {
+            background-color: #c41e3a;
+        }
+
+        .color-dot.selected {
+            border: 2px solid #ffffff;
+            box-shadow: 0 0 0 2px #000000;
+        }
+
+        /* Main Product Grid */
+        .products-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .active-filters {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .active-filter {
+            background-color: #0a0a0a;
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .active-filter i {
+            cursor: pointer;
+            opacity: 0.5;
+            transition: opacity 0.3s;
+        }
+
+        .active-filter i:hover {
+            opacity: 1;
+        }
+
+        .clear-all {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.85rem;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        /* Enhanced Product Card */
+        .product-card {
+            background-color: #0a0a0a;
+            border: 1px solid rgba(255,255,255,0.03);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .product-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 1px solid rgba(255,255,255,0);
+            transition: all 0.4s;
+            pointer-events: none;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .product-card:hover::after {
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background-color: #ffffff;
+            color: #000000;
+            padding: 0.3rem 1rem;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            z-index: 2;
+        }
+
+        .product-badge.new {
+            background-color: #ffffff;
+        }
+
+        .product-badge.limited {
+            background-color: #c4a747;
+            color: #000000;
+        }
+
+        .product-image {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 3/4;
+        }
+
+     
+       
+
+        
+       .product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* filter: grayscale(100%);  /* REMOVED - images now show in full color */
+    transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.product-card:hover .product-image img {
+    transform: scale(1.08);
+}
+
+.product-image .hover-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s;
+    /* filter: grayscale(0%); /* Already full color */
+}
+
+.product-card:hover .hover-image {
+    opacity: 1;
+}
+
+        .product-quick-view {
+            position: absolute;
+            bottom: 1rem;
+            left: 1rem;
+            right: 1rem;
+            background-color: rgba(0,0,0,0.9);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 0.8rem;
+            text-align: center;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+            opacity: 0;
+            z-index: 3;
+            cursor: pointer;
+        }
+
+        .product-card:hover .product-quick-view {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .product-quick-view span {
+            font-size: 0.8rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-category {
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.4);
+            margin-bottom: 0.3rem;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            font-weight: 300;
+            margin-bottom: 0.3rem;
+        }
+
+        .product-price {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: #ffffff;
+        }
+
+        .product-rating {
+            margin-top: 0.5rem;
+            color: #c4a747;
+            font-size: 0.8rem;
+        }
+
+        .product-rating span {
+            color: rgba(255,255,255,0.5);
+            margin-left: 0.3rem;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s;
+        }
+
+        .product-card:hover .product-actions {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .product-actions .action-btn {
+            flex: 1;
+            padding: 0.6rem;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #ffffff;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .product-actions .action-btn:hover {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 3rem;
+        }
+
+        .page-item {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: transparent;
+            color: #ffffff;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .page-item:hover,
+        .page-item.active {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        .page-item.disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        /* List View */
+        .product-grid.list-view {
+            grid-template-columns: 1fr;
+        }
+
+        .product-grid.list-view .product-card {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 2rem;
+        }
+
+        .product-grid.list-view .product-image {
+            aspect-ratio: 1;
+        }
+
+        .product-grid.list-view .product-actions {
+            opacity: 1;
+            transform: none;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            border: 1px dashed rgba(255,255,255,0.1);
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            color: rgba(255,255,255,0.2);
+            margin-bottom: 1rem;
+        }
+
+        .empty-state h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .empty-state p {
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .shop-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-sidebar {
+                position: static;
+                display: none;
+            }
+            
+            .filter-sidebar.active {
+                display: block;
+            }
+            
+            .filter-left {
+                flex-wrap: wrap;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .filter-wrapper {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .product-grid.list-view .product-card {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="header-wrapper">
+                <div class="logo">
+                    <a href="../index.html">
+                        <span class="logo-text">LEE<span class="light">LUXE</span></span>
+                        <span class="logo-sub">stiletto house</span>
+                    </a>
+                </div>
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="collection.html">Collection</a></li>
+                        <li><a href="shop.html" class="active">Shop</a></li>
+                        <li><a href="story.html">Our Story</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="header-icons">
+                    <a href="#"><i class="fa-regular fa-user"></i></a>
+                    <a href="#" id="wishlistIcon"><i class="fa-regular fa-heart"></i><span class="cart-count">0</span></a>
+                    <a href="#" id="cartIcon"><i class="fa-regular fa-bag-shopping"></i><span class="cart-count">0</span></a>
+                </div>
+                <button class="mobile-menu-toggle">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Shop Hero -->
+        <section class="shop-hero">
+            <div class="shop-hero-content">
+                <div class="hero-subtitle">The Lee Luxe Collection</div>
+                <h1>Walk in <span style="font-style: italic;">power</span></h1>
+                <p style="color: rgba(255,255,255,0.7); max-width: 500px; margin: 0 auto;">Each pair tells a story of resilience. From R500 to R600, luxury that's within reach.</p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number" id="totalProducts">32</div>
+                        <div class="stat-label">Styles</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">R500-R600</div>
+                        <div class="stat-label">Price range</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">2</div>
+                        <div class="stat-label">Stores</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filter Bar -->
+        <section class="filter-bar">
+            <div class="container">
+                <div class="filter-wrapper">
+                    <div class="filter-left">
+                        <div class="filter-dropdown">
+                            <select id="sortSelect">
+                                <option value="featured">Sort: Featured</option>
+                                <option value="newest">Newest first</option>
+                                <option value="price-low">Price: Low to high</option>
+                                <option value="price-high">Price: High to low</option>
+                                <option value="popular">Most popular</option>
+                            </select>
+                        </div>
+                        <div class="filter-tags">
+                            <span class="filter-tag active">All</span>
+                            <span class="filter-tag">New arrivals</span>
+                            <span class="filter-tag">Best sellers</span>
+                            <span class="filter-tag">Limited</span>
+                            <span class="filter-tag">Sale</span>
+                        </div>
+                        <button class="filter-tag" id="toggleFilters" style="display: none;">
+                            <i class="fa-solid fa-sliders"></i> Filters
+                        </button>
+                    </div>
+                    <div class="filter-right">
+                        <div class="results-count" id="resultsCount">32 products</div>
+                        <div class="view-toggle">
+                            <button class="view-btn active" id="gridView"><i class="fa-solid fa-grid-2"></i></button>
+                            <button class="view-btn" id="listView"><i class="fa-solid fa-list"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Shop Content -->
+        <section class="shop-layout">
+            <div class="container">
+                <div class="shop-grid">
+                    <!-- Sidebar Filters -->
+                    <aside class="filter-sidebar" id="filterSidebar">
+                        <div class="filter-section">
+                            <h3>Category</h3>
+                            <div class="filter-option">
+                                <input type="checkbox" id="cat-pumps">
+                                <label for="cat-pumps">Pumps <span class="count">(12)</span></label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="cat-sandals">
+                                <label for="cat-sandals">Sandals <span class="count">(8)</span></label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="cat-boots">
+                                <label for="cat-boots">Boots <span class="count">(6)</span></label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="cat-evening">
+                                <label for="cat-evening">Evening <span class="count">(6)</span></label>
+                            </div>
+                        </div>
+
+                        <div class="filter-section">
+                            <h3>Price range</h3>
+                            <div class="price-range">
+                                <div class="price-inputs">
+                                    <div class="price-input">
+                                        <label>Min</label>
+                                        <input type="number" value="500" min="0" max="600" id="minPrice">
+                                    </div>
+                                    <div class="price-input">
+                                        <label>Max</label>
+                                        <input type="number" value="600" min="500" max="1000" id="maxPrice">
+                                    </div>
+                                </div>
+                                <div class="price-slider">
+                                    <div class="fill"></div>
+                                </div>
+                            </div>
+                            <div class="filter-option" style="margin-top: 1rem;">
+                                <input type="checkbox" id="price-under550">
+                                <label for="price-under550">Under R550 <span class="count">(15)</span></label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="price-550-580">
+                                <label for="price-550-580">R550 - R580 <span class="count">(12)</span></label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="price-580-600">
+                                <label for="price-580-600">R580 - R600 <span class="count">(5)</span></label>
+                            </div>
+                        </div>
+
+                        <div class="filter-section">
+                            <h3>Color</h3>
+                            <div class="color-options">
+                                <div class="color-dot black selected" data-color="black"></div>
+                                <div class="color-dot white" data-color="white"></div>
+                                <div class="color-dot nude" data-color="nude"></div>
+                                <div class="color-dot red" data-color="red"></div>
+                            </div>
+                            <div style="margin-top: 1rem;">
+                                <div class="filter-option">
+                                    <input type="checkbox" id="color-black">
+                                    <label for="color-black">Black <span class="count">(18)</span></label>
+                                </div>
+                                <div class="filter-option">
+                                    <input type="checkbox" id="color-white">
+                                    <label for="color-white">White <span class="count">(6)</span></label>
+                                </div>
+                                <div class="filter-option">
+                                    <input type="checkbox" id="color-nude">
+                                    <label for="color-nude">Nude <span class="count">(5)</span></label>
+                                </div>
+                                <div class="filter-option">
+                                    <input type="checkbox" id="color-red">
+                                    <label for="color-red">Red <span class="count">(3)</span></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="filter-section">
+                            <h3>Heel height</h3>
+                            <div class="filter-option">
+                                <input type="checkbox" id="heel-5">
+                                <label for="heel-5">5cm (kitten) <span class="count">(4)</span></label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="heel-8">
+                                <label for="heel-8">8cm (mid) <span class="count">(12)</span></label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="heel-10">
+                                <label for="heel-10">10cm (classic) <span class="count">(10)</span></label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="heel-12">
+                                <label for="heel-12">12cm+ (runway) <span class="count">(6)</span></label>
+                            </div>
+                        </div>
+
+                        <div class="filter-section">
+                            <h3>Availability</h3>
+                            <div class="filter-option">
+                                <input type="checkbox" id="in-stock">
+                                <label for="in-stock">In stock <span class="count">(28)</span></label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="in-stores">
+                                <label for="in-stores">In stores <span class="count">(20)</span></label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="preorder">
+                                <label for="preorder">Pre-order <span class="count">(4)</span></label>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-outline" style="width: 100%;" id="clearFilters">Clear all filters</button>
+                    </aside>
+
+                    <!-- Products Main Area -->
+                    <div class="products-main">
+                        <div class="products-header">
+                            <div class="active-filters" id="activeFilters">
+                                <span class="active-filter">All shoes <i class="fa-solid fa-xmark"></i></span>
+                            </div>
+                            <span class="clear-all" id="clearAllBtn">Clear all</span>
+                        </div>
+
+                        <!-- Product Grid -->
+                        <div class="product-grid" id="productGrid">
+                            <!-- Products will be loaded dynamically -->
+                        </div>
+
+                        <!-- Empty State (hidden by default) -->
+                        <div class="empty-state" id="emptyState" style="display: none;">
+                            <i class="fa-regular fa-face-frown"></i>
+                            <h3>No shoes found</h3>
+                            <p>Try adjusting your filters or browse our full collection.</p>
+                            <button class="btn btn-outline" id="resetFilters">Reset filters</button>
+                        </div>
+
+                        <!-- Pagination -->
+                        <div class="pagination" id="pagination">
+                            <span class="page-item disabled"><i class="fa-solid fa-chevron-left"></i></span>
+                            <span class="page-item active">1</span>
+                            <span class="page-item">2</span>
+                            <span class="page-item">3</span>
+                            <span class="page-item">4</span>
+                            <span class="page-item">...</span>
+                            <span class="page-item">8</span>
+                            <span class="page-item"><i class="fa-solid fa-chevron-right"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recently Viewed -->
+        <section class="featured-collection" style="padding-top: 0;">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Recently viewed</h2>
+                    <p class="section-subtitle">Your footsteps, remembered</p>
+                </div>
+                <div class="product-grid" id="recentlyViewed" style="grid-template-columns: repeat(4, 1fr);">
+                    <!-- Will be populated by JS -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <span class="logo-text">LEE<span class="light">LUXE</span></span>
+                    </div>
+                    <p>Stiletto house born from resilience. Walking the line between Sandton grit and Hatfield grace.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="collection.html">Collection</a></li>
+                        <li><a href="shop.html">Shop</a></li>
+                        <li><a href="story.html">Our Story</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Stores</h4>
+                    <ul>
+                        <li>Hatfield, Pretoria</li>
+                        <li>Sandton City, Johannesburg</li>
+                        <li>Online worldwide</li>
+                    </ul>
+                </div>
+                <div class="footer-newsletter">
+                    <h4>The Luxe Edit</h4>
+                    <p>Subscribe for drops and stories.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email">
+                        <button type="submit"><i class="fa-solid fa-arrow-right"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Lee Luxe Stiletto House. All rights reserved. Built on passion.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Full product database
+       // Full product database with CORRECT paths to your shoes folder
+const allProducts = [
+    {
+        id: 1,
+        name: "The Sandton Pump",
+        price: 550,
+        category: "Pumps",
+        heelHeight: "10cm",
+        
+        inStock: true,
+        isNew: true,
+        isLimited: false,
+        rating: 4.8,
+        reviews: 124,
+        image: "../images/shoes/1.png",
+        hoverImage: "../images/shoes/2.png",
+        description: "Architectural heel for the boardroom. The signature Sandton silhouette."
+    },
+    {
+        id: 2,
+        name: "Hatfield Stiletto",
+        price: 525,
+        category: "Pumps",
+        heelHeight: "8cm",
+        color: "nude",
+        inStock: true,
+        isNew: false,
+        isLimited: false,
+        rating: 4.9,
+        reviews: 89,
+        image: "../images/shoes/2.jfif",
+        hoverImage: "../images/shoes/3.jfif",
+        description: "The campus icon, reimagined. Perfect for long days."
+    },
+    {
+        id: 3,
+        name: "The Luxe Pump",
+        price: 600,
+        category: "Evening",
+        heelHeight: "12cm",
+        color: "black",
+        inStock: true,
+        isNew: true,
+        isLimited: true,
+        rating: 5.0,
+        reviews: 42,
+        image: "../images/shoes/3.jfif",
+        hoverImage: "../images/shoes/4.jfif",
+        description: "Limited edition, unlimited power. Only 50 pairs."
+    },
+    {
+        id: 4,
+        name: "Midnight Stiletto",
+        price: 580,
+        category: "Evening",
+        heelHeight: "12cm",
+        color: "black",
+        inStock: true,
+        isNew: false,
+        isLimited: false,
+        rating: 4.7,
+        reviews: 156,
+        image: "../images/shoes/4.png",
+        hoverImage: "../images/shoes/5.png",
+        description: "For the woman who owns the night."
+    },
+    {
+        id: 5,
+        name: "Rosebank Mule",
+        price: 540,
+        category: "Sandals",
+        heelHeight: "5cm",
+        color: "white",
+        inStock: true,
+        isNew: true,
+        isLimited: false,
+        rating: 4.6,
+        reviews: 34,
+        image: "../images/shoes/5.jfif",
+        hoverImage: "../images/shoes/6.jfif",
+        description: "Effortless elegance for the creative class."
+    },
+    {
+        id: 6,
+        name: "The Ivory Tower",
+        price: 595,
+        category: "Pumps",
+        heelHeight: "10cm",
+        color: "white",
+        inStock: false,
+        isNew: false,
+        isLimited: true,
+        rating: 4.9,
+        reviews: 67,
+        image: "../images/shoes/6.jfif",
+        hoverImage: "../images/shoes/1.jfif",
+        description: "Pure sophistication, limited release."
+    },
+    {
+        id: 7,
+        name: "Melrose Arch",
+        price: 560,
+        category: "Boots",
+        heelHeight: "8cm",
+        color: "black",
+        inStock: true,
+        isNew: false,
+        isLimited: false,
+        rating: 4.8,
+        reviews: 203,
+        image: "../images/shoes/1.jfif",
+        hoverImage: "../images/shoes/2.jfif",
+        description: "Ankle boots with architectural edge."
+    },
+    {
+        id: 8,
+        name: "The First Lady",
+        price: 600,
+        category: "Pumps",
+        heelHeight: "10cm",
+        color: "red",
+        inStock: true,
+        isNew: true,
+        isLimited: true,
+        rating: 5.0,
+        reviews: 28,
+        image: "../images/shoes/2.jfif",
+        hoverImage: "../images/shoes/3.jfif",
+        description: "Red sole energy, without the Paris price."
+    },
+    {
+        id: 9,
+        name: "The Graduate",
+        price: 530,
+        category: "Pumps",
+        heelHeight: "8cm",
+        color: "nude",
+        inStock: true,
+        isNew: false,
+        isLimited: false,
+        rating: 4.7,
+        reviews: 189,
+        image: "../images/shoes/3.jfif",
+        hoverImage: "../images/shoes/4.jfif",
+        description: "From graduation to the corner office."
+    },
+    {
+        id: 10,
+        name: "The CEO",
+        price: 590,
+        category: "Pumps",
+        heelHeight: "10cm",
+        color: "black",
+        inStock: true,
+        isNew: false,
+        isLimited: false,
+        rating: 4.9,
+        reviews: 312,
+        image: "../images/shoes/4.jfif",
+        hoverImage: "../images/shoes/5.jfif",
+        description: "Command any room."
+    },
+    {
+        id: 11,
+        name: "The Founder",
+        price: 575,
+        category: "Pumps",
+        heelHeight: "8cm",
+        color: "black",
+        inStock: true,
+        isNew: true,
+        isLimited: false,
+        rating: 4.8,
+        reviews: 56,
+        image: "../images/shoes/5.jfif",
+        hoverImage: "../images/shoes/6.jfif",
+        description: "Inspired by Lee's own journey."
+    },
+    {
+        id: 12,
+        name: "The R3000",
+        price: 500,
+        category: "Pumps",
+        heelHeight: "8cm",
+        color: "nude",
+        inStock: true,
+        isNew: true,
+        isLimited: false,
+        rating: 4.9,
+        reviews: 178,
+        image: "../images/shoes/6.jfif",
+        hoverImage: "../images/shoes/1.jfif",
+        description: "The shoe that started it all. Entry-level luxury."
+    }
+];
+        // DOM Elements
+        const productGrid = document.getElementById('productGrid');
+        const emptyState = document.getElementById('emptyState');
+        const resultsCount = document.getElementById('resultsCount');
+        const gridViewBtn = document.getElementById('gridView');
+        const listViewBtn = document.getElementById('listView');
+        const toggleFilters = document.getElementById('toggleFilters');
+        const filterSidebar = document.getElementById('filterSidebar');
+        const clearAllBtn = document.getElementById('clearAllBtn');
+        const resetFilters = document.getElementById('resetFilters');
+        const sortSelect = document.getElementById('sortSelect');
+
+        // State
+        let currentView = 'grid';
+        let currentProducts = [...allProducts];
+        let recentlyViewed = [];
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            renderProducts(allProducts);
+            updateResultsCount(allProducts.length);
+            loadRecentlyViewed();
+            
+            // Load from localStorage if available
+            const saved = localStorage.getItem('recentlyViewed');
+            if (saved) {
+                recentlyViewed = JSON.parse(saved);
+                renderRecentlyViewed();
+            }
+        });
+
+        // Render products
+        function renderProducts(products) {
+            if (!productGrid) return;
+            
+            if (products.length === 0) {
+                productGrid.style.display = 'none';
+                emptyState.style.display = 'block';
+                return;
+            }
+            
+            productGrid.style.display = 'grid';
+            emptyState.style.display = 'none';
+            
+            let html = '';
+            products.forEach(product => {
+                const badge = product.isNew ? '<div class="product-badge new">New</div>' : 
+                            product.isLimited ? '<div class="product-badge limited">Limited</div>' : '';
+                
+                // In renderRecentlyViewed function:
+                html += `
+    <div class="product-card" data-product-id="${product.id}" onclick="viewProduct(${product.id})">
+        <div class="product-image">
+            <img src="${product.image}" 
+                 alt="${product.name}"
+                 onerror="this.src='../images/leeluxe.png'">
+        </div>
+        <div class="product-info">
+            <h3 class="product-title">${product.name}</h3>
+            <p class="product-price">R${product.price}</p>
+        </div>
+    </div>
+`;
+            });
+            
+            productGrid.innerHTML = html;
+        }
+
+        // Update results count
+        function updateResultsCount(count) {
+            if (resultsCount) {
+                resultsCount.textContent = `${count} product${count !== 1 ? 's' : ''}`;
+            }
+        }
+
+        // View toggle
+        if (gridViewBtn) {
+            gridViewBtn.addEventListener('click', function() {
+                gridViewBtn.classList.add('active');
+                listViewBtn.classList.remove('active');
+                productGrid.classList.remove('list-view');
+                currentView = 'grid';
+            });
+        }
+        
+        if (listViewBtn) {
+            listViewBtn.addEventListener('click', function() {
+                listViewBtn.classList.add('active');
+                gridViewBtn.classList.remove('active');
+                productGrid.classList.add('list-view');
+                currentView = 'list';
+            });
+        }
+
+        // Mobile filters toggle
+        if (toggleFilters) {
+            toggleFilters.addEventListener('click', function() {
+                filterSidebar.classList.toggle('active');
+            });
+        }
+
+        // Sort functionality
+        if (sortSelect) {
+            sortSelect.addEventListener('change', function() {
+                const value = this.value;
+                let sorted = [...currentProducts];
+                
+                switch(value) {
+                    case 'price-low':
+                        sorted.sort((a, b) => a.price - b.price);
+                        break;
+                    case 'price-high':
+                        sorted.sort((a, b) => b.price - a.price);
+                        break;
+                    case 'newest':
+                        sorted = sorted.filter(p => p.isNew).concat(sorted.filter(p => !p.isNew));
+                        break;
+                    case 'popular':
+                        sorted.sort((a, b) => b.reviews - a.reviews);
+                        break;
+                    default:
+                        // featured - keep original order
+                        break;
+                }
+                
+                renderProducts(sorted);
+            });
+        }
+
+        // Clear all filters
+        if (clearAllBtn) {
+            clearAllBtn.addEventListener('click', function() {
+                renderProducts(allProducts);
+                updateResultsCount(allProducts.length);
+            });
+        }
+
+        if (resetFilters) {
+            resetFilters.addEventListener('click', function() {
+                renderProducts(allProducts);
+                updateResultsCount(allProducts.length);
+            });
+        }
+
+        // Product actions
+        window.viewProduct = function(productId) {
+            const product = allProducts.find(p => p.id === productId);
+            if (product) {
+                // Add to recently viewed
+                recentlyViewed = [product, ...recentlyViewed.filter(p => p.id !== productId)].slice(0, 4);
+                localStorage.setItem('recentlyViewed', JSON.stringify(recentlyViewed));
+                renderRecentlyViewed();
+                
+                // Show product details (in production, navigate to product page)
+                alert(`Viewing: ${product.name}\n${product.description}\nPrice: R${product.price}`);
+            }
+        };
+
+        window.quickView = function(productId) {
+            const product = allProducts.find(p => p.id === productId);
+            if (product) {
+                alert(`QUICK VIEW\n\n${product.name}\n${product.description}\nPrice: R${product.price}\nRating: ${product.rating} (${product.reviews} reviews)`);
+            }
+        };
+
+        window.addToCart = function(productId) {
+            const product = allProducts.find(p => p.id === productId);
+            if (product) {
+                // Update cart count
+                const cartIcon = document.querySelector('#cartIcon .cart-count');
+                if (cartIcon) {
+                    const current = parseInt(cartIcon.textContent) || 0;
+                    cartIcon.textContent = current + 1;
+                }
+                alert(`✨ Added to cart: ${product.name} (R${product.price})`);
+            }
+        };
+
+        window.addToWishlist = function(productId) {
+            const product = allProducts.find(p => p.id === productId);
+            if (product) {
+                const wishlistIcon = document.querySelector('#wishlistIcon .cart-count');
+                if (wishlistIcon) {
+                    const current = parseInt(wishlistIcon.textContent) || 0;
+                    wishlistIcon.textContent = current + 1;
+                }
+                alert(`❤️ Added to wishlist: ${product.name}`);
+            }
+        };
+
+        // Render recently viewed
+        function renderRecentlyViewed() {
+            const container = document.getElementById('recentlyViewed');
+            if (!container || recentlyViewed.length === 0) return;
+            
+            let html = '';
+            recentlyViewed.forEach(product => {
+
+              // In renderRecentlyViewed function:
+                html += `
+    <div class="product-card" data-product-id="${product.id}" onclick="viewProduct(${product.id})">
+        <div class="product-image">
+            <img src="${product.image}" 
+                 alt="${product.name}"
+                 onerror="this.src='../images/leeluxe.png'">
+        </div>
+        <div class="product-info">
+            <h3 class="product-title">${product.name}</h3>
+            <p class="product-price">R${product.price}</p>
+        </div>
+    </div>
+`;
+
+            });
+            
+            container.innerHTML = html;
+        }
+
+        // Load recently viewed from localStorage
+        function loadRecentlyViewed() {
+            const saved = localStorage.getItem('recentlyViewed');
+            if (saved) {
+                recentlyViewed = JSON.parse(saved);
+                renderRecentlyViewed();
+            }
+        }
+
+        // Filter functionality for checkboxes
+        document.querySelectorAll('.filter-option input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                // Get all active filters
+                const activeCategories = [...document.querySelectorAll('#cat-pumps, #cat-sandals, #cat-boots, #cat-evening')]
+                    .filter(cb => cb.checked)
+                    .map(cb => cb.id.replace('cat-', '').charAt(0).toUpperCase() + cb.id.replace('cat-', '').slice(1));
+                
+                const activeColors = [...document.querySelectorAll('#color-black, #color-white, #color-nude, #color-red')]
+                    .filter(cb => cb.checked)
+                    .map(cb => cb.id.replace('color-', ''));
+                
+                // Filter products
+                let filtered = allProducts;
+                
+                if (activeCategories.length > 0) {
+                    filtered = filtered.filter(p => activeCategories.includes(p.category));
+                }
+                
+                if (activeColors.length > 0) {
+                    filtered = filtered.filter(p => activeColors.includes(p.color));
+                }
+                
+                renderProducts(filtered);
+                updateResultsCount(filtered.length);
+            });
+        });
+
+        // Color dots
+        document.querySelectorAll('.color-dot').forEach(dot => {
+            dot.addEventListener('click', function() {
+                this.classList.toggle('selected');
+                // Trigger filter update
+                const color = this.dataset.color;
+                const checkbox = document.getElementById(`color-${color}`);
+                if (checkbox) {
+                    checkbox.checked = !checkbox.checked;
+                    checkbox.dispatchEvent(new Event('change'));
+                }
+            });
+        });
+
+        console.log('✨ Lee Luxe Shop — where every heel tells a story');
+    </script>
+</body>
+</html>

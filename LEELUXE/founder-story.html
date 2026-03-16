@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Founder Story · Lee Luxe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <style>
+        /* Founder Story Page Specific Styles */
+        .founder-hero {
+            height: 60vh;
+            min-height: 500px;
+            background: linear-gradient(90deg, #000000 0%, rgba(0,0,0,0.7) 100%), url('assets/images/founder-portrait.jpg');
+            background-size: cover;
+            background-position: center 30%;
+            display: flex;
+            align-items: flex-end;
+            padding-bottom: 4rem;
+            margin-top: 80px;
+        }
+        
+        .founder-hero-content {
+            max-width: 800px;
+        }
+        
+        .founder-hero h1 {
+            font-size: clamp(3rem, 8vw, 5rem);
+            margin-bottom: 1rem;
+        }
+        
+        .founder-hero .hero-subtitle {
+            font-size: 1.2rem;
+            letter-spacing: 0.3em;
+            color: rgba(255,255,255,0.7);
+        }
+        
+        .founder-narrative {
+            padding: 6rem 0;
+            background-color: #000;
+        }
+        
+        .narrative-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+        
+        .narrative-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+        
+        .narrative-text p {
+            margin-bottom: 2rem;
+            color: rgba(255,255,255,0.9);
+        }
+        
+        .narrative-text .highlight {
+            font-size: 2rem;
+            font-weight: 200;
+            line-height: 1.3;
+            color: #fff;
+            border-left: 2px solid #fff;
+            padding-left: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-bottom: 3rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.1rem;
+            top: 0;
+            width: 0.5rem;
+            height: 0.5rem;
+            border-radius: 50%;
+            background: #fff;
+        }
+        
+        .timeline-year {
+            font-size: 1rem;
+            letter-spacing: 0.2em;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .timeline-desc {
+            color: rgba(255,255,255,0.7);
+        }
+        
+        .r3000-card {
+            background: #0a0a0a;
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 3rem;
+            text-align: center;
+            margin: 4rem 0;
+        }
+        
+        .r3000-card .amount {
+            font-size: 5rem;
+            font-weight: 200;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+        
+        .r3000-card .caption {
+            font-size: 1.2rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.6);
+        }
+        
+        @media (max-width: 768px) {
+            .narrative-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Component (same as index) -->
+    <header class="site-header">
+        <div class="container">
+            <div class="header-wrapper">
+                <div class="logo">
+                    <a href="index.html">
+                        <span class="logo-text">LEE<span class="light">LUXE</span></span>
+                        <span class="logo-sub">stiletto house</span>
+                    </a>
+                </div>
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="pages/collection.html">Collection</a></li>
+                        <li><a href="pages/story.html" class="active">Our Story</a></li>
+                        <li><a href="pages/contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="header-icons">
+                    <a href="#"><i class="fa-regular fa-user"></i></a>
+                    <a href="#"><i class="fa-regular fa-heart"></i></a>
+                    <a href="#"><i class="fa-regular fa-bag-shopping"></i></a>
+                </div>
+                <button class="mobile-menu-toggle">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Founder Hero -->
+        <section class="founder-hero">
+            <div class="container">
+                <div class="founder-hero-content">
+                    <div class="hero-subtitle">The woman behind the heel</div>
+                    <h1>Lee's journey:<br>from R3000 to two stores</h1>
+                </div>
+            </div>
+        </section>
+
+        <!-- The R3000 Story -->
+        <section class="founder-narrative">
+            <div class="container">
+                <div class="r3000-card">
+                    <div class="amount">R3000</div>
+                    <div class="caption">The loan that started an empire</div>
+                    <p style="margin-top: 2rem; color: rgba(255,255,255,0.7); max-width: 600px; margin-left: auto; margin-right: auto;">
+                        In 2020, a friend handed Lee R3000. "Start something," she said. That something became Lee Luxe.
+                    </p>
+                </div>
+
+                <div class="narrative-grid">
+                    <div class="narrative-text">
+                        <p>Lee sat in a Sandton call centre, headset on, taking call after call. She was good at it — the clients loved her voice, her patience. But something was missing. She dreamed of buildings, of architecture, of creating things that stood tall.</p>
+                        
+                        <p>One Friday afternoon, she resigned. No backup plan. Just a feeling that she was meant for more.</p>
+                        
+                        <div class="highlight">
+                            "Months of nothing. Rent due. Calls ignored. The silence was loud."
+                        </div>
+                        
+                        <p>Then a friend, someone who had watched her struggle, handed her an envelope. Inside: R3000 in cash. "Start something," she said. Lee bought three pairs of stilettos from a small manufacturer, photographed them on her kitchen floor, and posted them on Instagram.</p>
+                        
+                        <p>The first pair sold within an hour. Then the second. By the end of the week, all three were gone. She reinvested everything. The side hustle became a business. The business became a brand.</p>
+                        
+                        <p>Today, Lee Luxe has two stores — one in Hatfield, one in Sandton — and a growing online family. Every heel carries that original fire: the belief that one woman, with R3000 and a dream, can build something lasting.</p>
+                    </div>
+                    
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-year">2019</div>
+                            <div class="timeline-title">The call centre years</div>
+                            <div class="timeline-desc">Working 9-5 in Sandton, saving every rand, dreaming of design.</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-year">2020</div>
+                            <div class="timeline-title">Resignation & struggle</div>
+                            <div class="timeline-desc">Left corporate. Months of uncertainty, but never doubt.</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-year">2020 (August)</div>
+                            <div class="timeline-title">The R3000 moment</div>
+                            <div class="timeline-desc">A friend's loan. Three pairs of shoes. The first sale.</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-year">2021</div>
+                            <div class="timeline-title">First store: Hatfield</div>
+                            <div class="timeline-desc">From kitchen table to brick-and-mortar. The dream solidified.</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-year">2023</div>
+                            <div class="timeline-title">Second store & e-commerce</div>
+                            <div class="timeline-desc">Sandton City. Shopify launch. National reach.</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-year">Today</div>
+                            <div class="timeline-title">The Luxe House</div>
+                            <div class="timeline-desc">Two stores, growing team, thousands of women walking taller.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Founder Quote -->
+        <section class="founder-quote" style="padding: 4rem 0;">
+            <div class="container">
+                <div class="quote-wrapper">
+                    <span class="quote-mark">"</span>
+                    <p class="quote-text">I want every woman who wears Lee Luxe to feel what I felt that first sale — that she can own any room, any boardroom, any dream.</p>
+                    <div class="quote-author">— Lee, Founder & Creative Director</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer (same as index) -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <span class="logo-text">LEE<span class="light">LUXE</span></span>
+                    </div>
+                    <p>Stiletto house born from resilience. Walking the line between Sandton grit and Hatfield grace.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="pages/collection.html">Collection</a></li>
+                        <li><a href="pages/story.html">Our Story</a></li>
+                        <li><a href="pages/contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Stores</h4>
+                    <ul>
+                        <li>Hatfield, Pretoria</li>
+                        <li>Sandton City, Johannesburg</li>
+                        <li>Online worldwide</li>
+                    </ul>
+                </div>
+                <div class="footer-newsletter">
+                    <h4>The Luxe Edit</h4>
+                    <p>Subscribe for drops and stories.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email">
+                        <button type="submit"><i class="fa-solid fa-arrow-right"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Lee Luxe Stiletto House. All rights reserved. Built on passion.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
